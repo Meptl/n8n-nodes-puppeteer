@@ -796,6 +796,15 @@ export const nodeDescription: INodeTypeDescription = {
 					],
 				},
 				{
+					displayName: 'Captcha',
+					name: 'captcha',
+					type: 'string',
+					required: false,
+					default: '',
+					description:
+						'API key for solving captchas automatically.',
+				},
+				{
 					displayName: 'Proxy Server',
 					name: 'proxyServer',
 					type: 'string',

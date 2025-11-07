@@ -13,7 +13,8 @@ import { makeResolverFromLegacyOptions, NodeVM } from '@n8n/vm2';
 import puppeteer from 'puppeteer-extra';
 import pluginStealth from 'puppeteer-extra-plugin-stealth';
 //@ts-ignore
-import pluginHumanTyping from 'puppeteer-extra-plugin-human-typing'; 
+import pluginHumanTyping from 'puppeteer-extra-plugin-human-typing';
+import pluginRecaptcha from 'puppeteer-extra-plugin-recaptcha';
 import {
 	type Browser,
 	type Device,
@@ -474,6 +475,7 @@ export class Puppeteer implements INodeType {
 			keyboardLayout: "en",
 			...((options.humanTypingOptions as IDataObject) || {})
 		};
+		const captcha = options.captcha as string;
 		const launchArguments = (options.launchArguments as IDataObject) || {};
 		const launchArgs: IDataObject[] = launchArguments.args as IDataObject[];
 		const args: string[] = [];
@@ -514,6 +516,14 @@ export class Puppeteer implements INodeType {
 		}
 		if (humanTyping) {
 			puppeteer.use(pluginHumanTyping(humanTypingOptions));
+		}
+		if (captcha) {
+			puppeteer.use(pluginRecaptcha({
+				provider: {
+					id: '2captcha',
+					token: captcha
+				}
+			}));
 		}
 
 		if (headless && headlessShell) {
