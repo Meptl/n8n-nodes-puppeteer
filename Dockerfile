@@ -23,7 +23,7 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
 # Install n8n-nodes-puppeteer in a permanent location
 COPY . /opt/n8n-custom-nodes/node_modules/n8n-nodes-puppeteer
 RUN cd /opt/n8n-custom-nodes/node_modules/n8n-nodes-puppeteer && \
-    npm install && \
+    npm install --include=dev && \
 		npm run build && \
     chown -R node:node /opt/n8n-custom-nodes
 

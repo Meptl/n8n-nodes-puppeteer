@@ -1,4 +1,5 @@
-import { type INodeTypeDescription, NodeConnectionType } from 'n8n-workflow';
+import type { INodeTypeDescription } from 'n8n-workflow';
+import { NodeConnectionTypes } from 'n8n-workflow';
 import { existsSync, readFileSync } from 'node:fs';
 
 function isRunningInContainer(): boolean {
@@ -44,7 +45,7 @@ function isRunningInContainer(): boolean {
 export const nodeDescription: INodeTypeDescription = {
 	displayName: 'Puppeteer',
 	name: 'puppeteer',
-	group: ['puppeteer'],
+	group: ['input'],
 	version: 1,
 	description: 'Automate browser interactions using Puppeteer',
 	defaults: {
@@ -52,8 +53,8 @@ export const nodeDescription: INodeTypeDescription = {
 		color: '#125580',
 	},
 	icon: 'file:puppeteer.svg',
-	inputs: [NodeConnectionType.Main],
-	outputs: [NodeConnectionType.Main],
+	inputs: [NodeConnectionTypes.Main],
+	outputs: [NodeConnectionTypes.Main],
 	usableAsTool: true,
 	properties: [
 		{
